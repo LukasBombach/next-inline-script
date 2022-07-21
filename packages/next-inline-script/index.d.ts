@@ -3,7 +3,7 @@ import type { ReactElement } from "react";
 type ScriptComponent<P = {}> = (props: P) => ReactElement<JSX.IntrinsicElements["script"], "script">;
 
 type ScriptImport<P> = Promise<{
-  default?: (props: P) => void;
+  default: (props: P) => void;
 }>;
 
 /**

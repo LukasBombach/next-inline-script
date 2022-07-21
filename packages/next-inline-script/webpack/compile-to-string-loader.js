@@ -163,10 +163,6 @@ module.exports = function compileToStringLoader(content, map, meta) {
         throw new Error(errors[0].message);
       }
 
-      debugger;
-
-      console.log("### source", source);
-
       if (!source) {
         throw new Error("Failed to get source");
       }

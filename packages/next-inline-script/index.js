@@ -39,8 +39,6 @@ module.exports.createInlineScript = function createInlineScript(sourceCodeAsProm
     // resolve.
     const mod = await sourceCodeAsPromised;
 
-    console.log("mod.default", JSON.stringify(mod.default));
-
     // eslint-disable-next-line react/display-name
     return props => {
       // We expected to export a function called `script` from developers using this library.
