@@ -1,6 +1,4 @@
-/* eslint-disable  @typescript-eslint/no-var-requires */
-
-const { name } = require('../package.json');
+const { name } = require("../package.json");
 const loader = `${name}/webpack/compile-to-string-loader.js`;
 
 /*
@@ -11,12 +9,9 @@ const loader = `${name}/webpack/compile-to-string-loader.js`;
  * @see https://koukia.ca/top-6-ways-to-search-for-a-string-in-javascript-and-performance-benchmarks-ce3e9b81ad31
  */
 // eslint-disable-next-line no-useless-escape
-const importsThisLib = new RegExp(`import \{ .+? \} from '${name}`);
+const importsThisLib = new RegExp(`import \{ .+? \} from ['"]${name}`);
 
-const callToCompileToString = /(?<=compileToString\()'(.+?)'(?=\))/g;
 const callToCreateInlineScriptWithImport = /(?<=createInlineScript\(import\(')(.+?)(?='\)\))/g;
-
-const wrapPathWithRequire = `require('${loader}!$1')`;
 const prependImportedFileWithLoader = `${loader}!$1`;
 
 /**
@@ -48,7 +43,6 @@ module.exports = function cheapReplaceLoader(content) {
   const callback = this.async();
 
   if (importsThisLib.test(content)) {
-    content = content.replace(callToCompileToString, wrapPathWithRequire);
     content = content.replace(callToCreateInlineScriptWithImport, prependImportedFileWithLoader);
   }
 

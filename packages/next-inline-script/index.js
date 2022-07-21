@@ -15,10 +15,10 @@ const { default: dynamic } = require("next/dynamic");
  * that returns a promise, but the promise itself, so that is why there is this
  * weird line that just awaits a variable name
  *
- * @param {Promise<string>} promiseReturningTheCompiledScriptAsString
+ * @param {Promise<string>} sourceCodeAsPromised
  * @returns {import('react').VFC}
  */
-module.exports.createInlineScript = function createInlineScript(promiseReturningTheCompiledScriptAsString) {
+module.exports.createInlineScript = function createInlineScript(sourceCodeAsPromised) {
   /**
    * We are getting a promise as a parameter (something that is asnyc) and we
    * return a react component (synchronously). If we were to wait for the
@@ -37,8 +37,11 @@ module.exports.createInlineScript = function createInlineScript(promiseReturning
     // This may look weird, we are waiting for a variable, not a function call.
     // The parameter we get is already a promise, that we need to wait for it to
     // resolve.
-    const { default: compiledScriptSourcesAsString } = await promiseReturningTheCompiledScriptAsString;
+    const mod = await sourceCodeAsPromised;
 
+    console.log("mod.default", JSON.stringify(mod.default));
+
+    // eslint-disable-next-line react/display-name
     return props => {
       // We expected to export a function called `script` from developers using this library.
       // The script they provided to is now compiled as a string and resides inside
@@ -54,7 +57,9 @@ module.exports.createInlineScript = function createInlineScript(promiseReturning
       //
       // In other words: This calls the `script` function of the script (module) provided by the
       // developers using the props passed to the react component (the one we return)
-      const scriptContents = `${compiledScriptSourcesAsString}.getScriptProps(${JSON.stringify(props)});`;
+
+      const scriptContents =
+        typeof mod.default === "function" ? `(${mod.default})(${JSON.stringify(props)});` : JSON.stringify(mod);
       return createElement("script", { dangerouslySetInnerHTML: { __html: scriptContents } }, null);
     };
   });

@@ -1,5 +1,5 @@
-const withTM = require("next-transpile-modules")(["ui"]);
+const withCompileToString = require("next-inline-script/plugin");
 
-module.exports = withTM({
+module.exports = withCompileToString({
   reactStrictMode: true,
 });
