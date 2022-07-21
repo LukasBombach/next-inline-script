@@ -1,5 +1,7 @@
 # next-inline-script
 
+> Check out the demo at [/apps/web](https://github.com/LukasBombach/next-inline-script/tree/master/apps/web)
+
 Importing a file with `createInlineScript`
 
 ```tsx
