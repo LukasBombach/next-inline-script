@@ -3,7 +3,6 @@ import { createInlineScript } from "next-inline-script";
 
 const HelloWorld = createInlineScript(import("../head/helloWorld"));
 const WithProps = createInlineScript(import("../head/withProps"));
-//const WithoutExports = createInlineScript(import("../head/withoutExport"));
 
 export default function Web() {
   return (
@@ -11,9 +10,15 @@ export default function Web() {
       <Head>
         <HelloWorld />
         <WithProps message="hello my message" />
-        {/* <WithoutExports /> */}
       </Head>
-      <h1>Web</h1>
+      <h1>Next Inline Script Demo</h1>
+      <ul>
+        <li>Open the console to see the logs from the inline scripts</li>
+        <li>
+          View the source (usually <code>cmd</code> + <code>u</code>) code to see your scripts rendered in the head of
+          your document
+        </li>
+      </ul>
     </div>
   );
 }

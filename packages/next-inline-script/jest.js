@@ -1,9 +1,10 @@
-const { createElement, useEffect } = require('react');
-const { default: dynamic } = require('next/dynamic');
+const { createElement, useEffect } = require("react");
+const { default: dynamic } = require("next/dynamic");
 
 module.exports.createInlineScript = function createInlineScript(promiseReturningTheCompiledScriptAsString) {
   return dynamic(async () => {
     const { getScriptProps } = await promiseReturningTheCompiledScriptAsString;
+    // eslint-disable-next-line react/display-name
     return props => {
       // If you expect specific elements to exist in your inline code
       // and in you render those elements in your test setup with react,
@@ -14,7 +15,7 @@ module.exports.createInlineScript = function createInlineScript(promiseReturning
         getScriptProps(props);
       });
 
-      return createElement('script', {}, '/* inline script source not visible for jest, but executed properly */');
+      return createElement("script", {}, "/* inline script source not visible for jest, but executed properly */");
     };
   });
 };
