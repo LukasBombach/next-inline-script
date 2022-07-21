@@ -71,6 +71,7 @@ the props of the generated React component and its data.
 - uses code splitting to separate your inline code from your main bundle, so your main bundle will not grow in size
 - uses next's compiler with all its settings. Any plugin you use will also be available in the inline code
 - code will be rendered at compile time, props will be injected at run time, so you can use dynamic data in your inline code
+- testing with jest is completely possible, but I still need to document it
 
 ## Documentaion
 
@@ -148,7 +149,7 @@ instead of hard-coded values in your script, you can _have your cake and eat it 
 
 ## State
 
-## Quirks
+### Quirks
 
 You need to pass an import statement to the `createInlineScript` function. This is to enable IDE and TS support,
 but this also comes with an _obligation_ to do this, you can't just us a path as a string, for instance.
