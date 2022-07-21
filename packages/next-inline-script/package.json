@@ -1,6 +1,6 @@
 {
   "name": "next-inline-script",
-  "version": "0.6.0",
+  "version": "0.5.0",
   "main": "index.js",
   "files": [
     "plugin.js",

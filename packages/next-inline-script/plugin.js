@@ -1,6 +1,4 @@
-/* eslint-disable  @typescript-eslint/no-var-requires */
-
-const { name } = require('../package.json');
+const { name } = require("../package.json");
 
 /**
  * @param {import('next').NextConfig} nextConfig
@@ -21,7 +19,7 @@ module.exports = (nextConfig = {}) => {
         use: `${name}/webpack/cheap-replace-loader.js`,
       });
 
-      if (typeof nextConfig.webpack === 'function') {
+      if (typeof nextConfig.webpack === "function") {
         return nextConfig.webpack(config, options);
       }
 
