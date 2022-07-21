@@ -1,0 +1,20 @@
+{
+  "name": "@paper/compile-to-string",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "files": [
+    "next/index.js",
+    "next/plugin.js",
+    "webpack/cheap-replace-loader.js",
+    "webpack/compile-to-string-loader.js",
+    "jest/next.js"
+  ],
+  "dependencies": {
+    "terser": "5.14.1"
+  },
+  "peerDependencies": {
+    "next": "*",
+    "react": "*",
+    "webpack": "*"
+  }
+}
