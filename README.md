@@ -68,7 +68,6 @@ the props of the generated React component and its data.
 
 ## Features
 
-- full TypeScript support
 - uses code splitting to separate your inline code from your main bundle, so your main bundle will not grow in size
 - uses next's compiler with all its settings. Any plugin you use will also be available in the inline code
 - code will be rendered at compile time, props will be injected at run time, so you can use dynamic data in your inline code
