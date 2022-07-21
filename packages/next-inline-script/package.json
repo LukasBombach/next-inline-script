@@ -1,13 +1,12 @@
 {
-  "name": "@paper/compile-to-string",
-  "version": "1.0.0",
-  "main": "lib/index.js",
+  "name": "next-inline-script",
+  "version": "0.6.0",
+  "main": "index.js",
   "files": [
-    "next/index.js",
-    "next/plugin.js",
+    "plugin.js",
+    "jest.js",
     "webpack/cheap-replace-loader.js",
-    "webpack/compile-to-string-loader.js",
-    "jest/next.js"
+    "webpack/compile-to-string-loader.js"
   ],
   "dependencies": {
     "terser": "5.14.1"

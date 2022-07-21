@@ -1,7 +1,9 @@
-import type { VFC } from 'react';
+import type { ReactElement } from "react";
+
+type ScriptComponent<P = {}> = (props: P) => ReactElement<JSX.IntrinsicElements["script"], "script">;
 
 type ScriptImport<P> = Promise<{
-  getScriptProps: (props: P) => void;
+  default?: (props: P) => void;
 }>;
 
 /**
@@ -23,4 +25,4 @@ type ScriptImport<P> = Promise<{
  * @todo typeguard props with serializable data
  * @todo type Props = Record<string, boolean | string | number | null>;
  */
-export function createInlineScript<P = Record<string, never>>(scriptImport: ScriptImport<P>): VFC<P>;
+export function createInlineScript<P = Record<string, never>>(scriptImport: ScriptImport<P>): ScriptComponent<P>;
