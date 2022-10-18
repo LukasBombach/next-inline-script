@@ -62,3 +62,8 @@ module.exports.createInlineScript = function createInlineScript(sourceCodeAsProm
     };
   });
 };
+
+module.exports.InlineScript = function InlineScript(props) {
+  console.log("InlineScript", "props", props);
+  return null;
+};

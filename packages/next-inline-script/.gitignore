@@ -1,1 +1,2 @@
-__test__/js/**/*.js
+__test__/js/**/*
+!__test__/js/**/.gitkeep

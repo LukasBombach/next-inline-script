@@ -33,6 +33,8 @@ module.exports = function compileToStringLoader(content, map, meta) {
   const isDev = this._compilation.options.mode === "development";
   const loaderCallback = this.async();
 
+  console.log("processing file", "\n", content);
+
   /**
    * We are running into an issue where our node process crashes with
    * an error that reads "heap out of memory" and it might be related

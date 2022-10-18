@@ -28,7 +28,7 @@ describe("jest setup", () => {
       mode: "production",
       entry: entryPath("entry"),
       output: {
-        path: outputPath("output"),
+        path: path.join(__dirname, "js", "output"),
       },
       module: {
         rules: [
@@ -36,6 +36,16 @@ describe("jest setup", () => {
             test: /\.(jsx|js|tsx|ts)$/,
             exclude: /node_modules/,
             use: `${name}/webpack/cheap-replace-loader.js`,
+          },
+          {
+            test: /\.(jsx|js|tsx|ts)$/,
+            exclude: /node_modules/,
+            use: {
+              loader: "babel-loader",
+              options: {
+                presets: ["@babel/preset-env", "@babel/preset-typescript", "@babel/preset-react"],
+              },
+            },
           },
         ],
       },
@@ -54,11 +64,11 @@ describe("jest setup", () => {
             throw new Error(`No result, are are ${typeof stats}, result is ${typeof result}`);
           }
 
-          if (result.warnings) {
-            result.warnings.forEach(warning => console.warn(warning));
+          if (result.warnings?.length) {
+            result.warnings.forEach(warning => console.warn(warning.message));
           }
 
-          if (result.errors) {
+          if (result.errors?.length) {
             throw result.errors[0];
           }
 
