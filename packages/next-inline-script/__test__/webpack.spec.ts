@@ -3,6 +3,8 @@ import { promises as fs } from "fs";
 import webpack from "webpack";
 import { name } from "../package.json";
 
+import type { StatsCompilation } from "webpack";
+
 describe("jest setup", () => {
   test("works", async () => {
     const entryPath = (name: string, ext = "js") => path.join(__dirname, "js", `${name}.${ext}`);
@@ -39,7 +41,35 @@ describe("jest setup", () => {
       },
     });
 
-    await new Promise<void>((resolve, reject) => compiler.run(err => (err ? reject(err) : resolve())));
+    const stats = await new Promise<StatsCompilation>((resolve, reject) =>
+      compiler.run(async (error, stats) => {
+        try {
+          const result = stats?.toJson();
+
+          if (error) {
+            throw error;
+          }
+
+          if (!result) {
+            throw new Error(`No result, are are ${typeof stats}, result is ${typeof result}`);
+          }
+
+          if (result.warnings) {
+            result.warnings.forEach(warning => console.warn(warning));
+          }
+
+          if (result.errors) {
+            throw result.errors[0];
+          }
+
+          await new Promise<void>((resolve, reject) => compiler.close(error => (error ? reject(error) : resolve())));
+
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        }
+      })
+    );
 
     expect(true).toBe(true);
   });
