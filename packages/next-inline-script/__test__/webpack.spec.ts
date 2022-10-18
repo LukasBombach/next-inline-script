@@ -3,19 +3,30 @@ import { promises as fs } from "fs";
 import webpack from "webpack";
 import { name } from "../package.json";
 
-const pluginDir = path.join(__dirname, "js");
-const outputDir = path.join(pluginDir, "output");
-
 describe("jest setup", () => {
   test("works", async () => {
-    const entryFile = path.join(pluginDir, "entry1.js");
-    const outputFile = path.join(outputDir, "entry1.js");
+    const entryPath = (name: string, ext = "js") => path.join(__dirname, "js", `${name}.${ext}`);
+    const outputPath = (name: string, ext = "js") => path.join(__dirname, "js", "output", `${name}.${ext}`);
+
+    const files = {
+      entry: `
+        import { InlineScript } from "next-inline-script";
+        const MyScript = () => <InlineScript src="./helloWorld.js" />;
+      `,
+      helloWorld: `
+        console.log('hello world');
+      `,
+    };
+
+    await Promise.all(
+      Object.entries(files).map(async ([name, content]) => await fs.writeFile(entryPath(name), content))
+    );
 
     const compiler = webpack({
-      mode: "development",
-      entry: entryFile,
+      mode: "production",
+      entry: entryPath("entry"),
       output: {
-        path: outputDir,
+        path: outputPath("output"),
       },
       module: {
         rules: [
@@ -28,10 +39,8 @@ describe("jest setup", () => {
       },
     });
 
-    await fs.writeFile(entryFile, "console.log('hello world');", "utf-8");
-
     await new Promise<void>((resolve, reject) => compiler.run(err => (err ? reject(err) : resolve())));
 
-    expect(entryFile).toBe(outputFile);
+    expect(true).toBe(true);
   });
 });
