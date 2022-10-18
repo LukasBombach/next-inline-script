@@ -1,6 +1,7 @@
 import path from "path";
 import { promises as fs } from "fs";
 import webpack from "webpack";
+import nodeExternals from "webpack-node-externals";
 import { name } from "../package.json";
 
 import type { StatsCompilation } from "webpack";
@@ -29,6 +30,11 @@ describe("jest setup", () => {
       entry: entryPath("entry"),
       output: {
         path: path.join(__dirname, "js", "output"),
+      },
+      target: "node",
+      externals: [nodeExternals()],
+      optimization: {
+        minimize: false,
       },
       module: {
         rules: [
