@@ -32,7 +32,7 @@ describe("jest setup", () => {
         path: path.join(__dirname, "js", "output"),
       },
       target: "node",
-      externals: [nodeExternals()],
+      externals: { "next/dynamic": "'next/dynamic'", react: "'react'" },
       optimization: {
         minimize: false,
       },
@@ -49,7 +49,18 @@ describe("jest setup", () => {
             use: {
               loader: "babel-loader",
               options: {
-                presets: ["@babel/preset-env", "@babel/preset-typescript", "@babel/preset-react"],
+                presets: [
+                  [
+                    "@babel/preset-env",
+                    {
+                      targets: {
+                        firefox: "106",
+                      },
+                    },
+                  ],
+                  "@babel/preset-typescript",
+                  "@babel/preset-react",
+                ],
               },
             },
           },
