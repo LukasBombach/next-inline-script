@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import type { ReactElement, FC } from "react";
 
 type ScriptComponent<P = {}> = (props: P) => ReactElement<JSX.IntrinsicElements["script"], "script">;
 
@@ -26,3 +26,7 @@ type ScriptImport<P> = Promise<{
  * @todo type Props = Record<string, boolean | string | number | null>;
  */
 export function createInlineScript<P = Record<string, never>>(scriptImport: ScriptImport<P>): ScriptComponent<P>;
+
+export function InlineScript<T extends string>(props: {
+  src: T | Promise<typeof import(T)>;
+}): ReactElement<JSX.IntrinsicElements["script"], "script">;

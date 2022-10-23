@@ -1,16 +1,16 @@
 import Head from "next/head";
-import { createInlineScript } from "next-inline-script";
+import { A } from "../components/A";
+import { InlineScript } from "next-inline-script";
 
-const HelloWorld = createInlineScript(import("../head/helloWorld"));
-const WithProps = createInlineScript(import("../head/withProps"));
+import type { ReactElement } from "react";
+
+// function InlineScript(props: { src: string }): ReactElement<JSX.IntrinsicElements["script"], "script"> {}
 
 export default function Web() {
   return (
     <div>
-      <Head>
-        <HelloWorld />
-        <WithProps message="hello my message" />
-      </Head>
+      {/* <A /> */}
+      <InlineScript src="../../apps/web/scripts/helloWorld" />
       <h1>Next Inline Script Demo</h1>
       <ul>
         <li>Open the console to see the logs from the inline scripts</li>

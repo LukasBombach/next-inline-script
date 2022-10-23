@@ -6,6 +6,7 @@
   "files": [
     "plugin.js",
     "jest.js",
+    "test-loader.js",
     "webpack/cheap-replace-loader.js",
     "webpack/compile-to-string-loader.js"
   ],
@@ -13,6 +14,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "parent-module": "3.0.0",
     "terser": "5.14.1"
   },
   "devDependencies": {
