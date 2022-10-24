@@ -66,6 +66,6 @@ module.exports.createInlineScript = function createInlineScript(sourceCodeAsProm
 module.exports.InlineScript = function InlineScript(props) {
   console.log("props", props.src);
   console.log("require.context", require.context);
-  const source = require(`next-inline-script/test-loader.js!./emptyString`);
+  const source = require(`next-inline-script/test-loader.js!./emptyString.js`);
   return createElement("script", { dangerouslySetInnerHTML: { __html: source } }, null);
 };

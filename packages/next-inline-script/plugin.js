@@ -1,5 +1,20 @@
 const { name } = require("./package.json");
 
+class NextInlineScriptPlugin {
+  // Define `apply` as its prototype method which is supplied with compiler as its argument
+  apply(compiler) {
+    compiler.hooks.normalModuleFactory.tap(NextInlineScriptPlugin.name, nmf => {
+      nmf.hooks.beforeResolve.tap(NextInlineScriptPlugin.name, resolveData => {
+        console.log("# REQ", resolveData.request);
+
+        if (typeof resolveData.request === "string" && resolveData.request.test(/next-inline-script\/test-loader/)) {
+          debugger;
+        }
+      });
+    });
+  }
+}
+
 /**
  * @param {import('next').NextConfig} nextConfig
  */
@@ -18,6 +33,8 @@ module.exports = (nextConfig = {}) => {
         exclude: /node_modules/,
         use: `${name}/webpack/cheap-replace-loader.js`,
       });
+
+      config.plugins.push(new NextInlineScriptPlugin());
 
       if (typeof nextConfig.webpack === "function") {
         return nextConfig.webpack(config, options);
