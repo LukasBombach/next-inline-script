@@ -7,5 +7,6 @@ module.exports = function testLoader(content, map, meta) {
 };
 
 module.exports.pitch = function (remainingRequest, precedingRequest, data) {
+  // this._module.issuer.issuer.resource
   debugger;
 };

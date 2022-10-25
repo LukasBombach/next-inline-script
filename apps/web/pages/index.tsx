@@ -10,7 +10,8 @@ export default function Web() {
   return (
     <div>
       {/* <A /> */}
-      <InlineScript src="../../apps/web/scripts/helloWorld" />
+      {/* <InlineScript src="../../apps/web/scripts/helloWorld" /> */}
+      <A />
       <h1>Next Inline Script Demo</h1>
       <ul>
         <li>Open the console to see the logs from the inline scripts</li>

@@ -7,9 +7,9 @@ class NextInlineScriptPlugin {
       nmf.hooks.beforeResolve.tap(NextInlineScriptPlugin.name, resolveData => {
         console.log("# REQ", resolveData.request);
 
-        if (typeof resolveData.request === "string" && resolveData.request.test(/next-inline-script\/test-loader/)) {
-          debugger;
-        }
+        //  if (typeof resolveData.request === "string" && resolveData.request.test(/next-inline-script\/test-loader/)) {
+        //    //debugger;
+        //  }
       });
     });
   }
